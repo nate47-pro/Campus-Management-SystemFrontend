@@ -40,15 +40,6 @@ Viva-Vents is a comprehensive campus event management system that allows users t
 - Font Awesome for icons
 - Responsive design principles
 
-## Server Links
-
-- **Development Server**: [http://localhost:3000](http://localhost:3000)
-- **Production Server**: [https://viva-vents.example.com](https://viva-vents.example.com)
-- **API Documentation**: [https://api.viva-vents.example.com/docs](https://api.viva-vents.example.com/docs)
-- **Admin Portal**: [https://admin.viva-vents.example.com](https://admin.viva-vents.example.com)
-
-Note: Replace example.com URLs with your actual production server URLs.
-
 ## Project Structure
 
 
@@ -67,4 +58,5 @@ The application is fully responsive and optimized for:
 - Mobile (below 768px)
 
 ## Color Scheme
+
 

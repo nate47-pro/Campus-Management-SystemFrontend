@@ -74,47 +74,8 @@
             </div>
         </div>
     </div>
-    <script src="js/auth.js"></script>
+  
     <script src="https://kit.fontawesome.com/your-font-awesome-kit.js"></script>
-   
-    <script>
-    document.getElementById('registerForm').addEventListener('submit', async function(event) {
-        event.preventDefault();
-        
-        const username = document.getElementById('username').value;
-        const email = document.getElementById('email').value;
-        const password = document.getElementById('password').value;
-        const preferences = Array.from(document.querySelectorAll('input[name="preferences"]:checked'))
-            .map(checkbox => parseInt(checkbox.value));
-
-        const data = {
-            username,
-            email,
-            password,
-            preferences
-        };
-
-        try {
-            const response = await fetch('/api/register', {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json'
-                },
-                body: JSON.stringify(data)
-            });
-
-            if (response.ok) {
-                localStorage.setItem('username', username);
-                alert('Registration successful!');
-                window.location.href = '/login.html';
-            } else {
-                const error = await response.json();
-                alert('Error: ' + error.message);
-            }
-        } catch (error) {
-            alert('Error: ' + error.message);
-        }
-    });
-    </script>
+   <script src="js/register.js"></script>
 </body>
 </html>
