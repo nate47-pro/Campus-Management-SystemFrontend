@@ -1,0 +1,70 @@
+/* Additional styles specific to the registration page */
+.preferences-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 10px;
+    margin-top: 5px;
+}
+
+.preference-item {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-size: 14px;
+    color: #0c0c0c;
+    cursor: pointer;
+}
+
+.preference-item input[type="checkbox"] {
+    width: 16px;
+    height: 16px;
+    cursor: pointer;
+}
+
+/* Adjust form section padding for additional fields */
+.login-form-section {
+    padding: 30px 40px;
+    overflow-y: auto;
+    max-height: 600px;
+}
+
+/* Style for password requirements if needed */
+.password-requirements {
+    font-size: 12px;
+    color: #101010;
+    margin-top: 5px;
+}
+
+/* Adjust button spacing */
+.login-btn {
+    margin-top: 20px;
+}
+
+/* Responsive adjustments */
+@media screen and (max-width: 768px) {
+    .preferences-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .login-form-section {
+        padding: 20px;
+    }
+}
+
+/* Custom scrollbar for the form section */
+.login-form-section::-webkit-scrollbar {
+    width: 6px;
+}
+
+.login-form-section::-webkit-scrollbar-track {
+    background: #f1f1f1;
+}
+
+.login-form-section::-webkit-scrollbar-thumb {
+    background: #0e0e0e;
+    border-radius: 3px;
+}
+
+.login-form-section::-webkit-scrollbar-thumb:hover {
+    background: #080808;
+} 

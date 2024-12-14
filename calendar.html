@@ -1,0 +1,191 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Calendar</title>
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/user_dashboard.css">
+    <link rel="stylesheet" href="css/calendar.css">
+    <link href='https://cdn.jsdelivr.net/npm/@fullcalendar/core@6.1.8/main.min.css' rel='stylesheet' />
+    <link href='https://cdn.jsdelivr.net/npm/@fullcalendar/daygrid@6.1.8/main.min.css' rel='stylesheet' />
+    <link href='https://cdn.jsdelivr.net/npm/@fullcalendar/timegrid@6.1.8/main.min.css' rel='stylesheet' />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+</head>
+<body>
+    <div class="dashboard-container">
+        <!-- Sidebar -->
+        <aside class="sidebar">
+            <div class="sidebar-header">
+                <img src="images/logo.png" alt="Logo" class="logo">
+                <h2>Viva-Vents</h2>
+            </div>
+            
+            <nav class="sidebar-nav">
+                <a href="dashboard.html" class="nav-item">
+                    <i class="fas fa-home"></i>
+                    <span>Dashboard</span>
+                </a>
+                <a href="calendar.html" class="nav-item active">
+                    <i class="fas fa-calendar-alt"></i>
+                    <span>Calendar</span>
+                </a>
+                <a href="my-events.html" class="nav-item">
+                    <i class="fas fa-ticket-alt"></i>
+                    <span>My Events</span>
+                </a>
+                <a href="admin.html" class="nav-item admin-only">
+                    <i class="fas fa-cog"></i>
+                    <span>Admin Panel</span>
+                </a>
+            </nav>
+
+            <div class="sidebar-footer">
+                <a href="#" id="logoutBtn" class="nav-item">
+                    <i class="fas fa-sign-out-alt"></i>
+                    <span>Logout</span>
+                </a>
+            </div>
+        </aside>
+
+        <!-- Main Content -->
+        <main class="main-content">
+            <header class="top-bar">
+                <div class="calendar-header">
+                    <h1>Event Calendar</h1>
+                    <div class="view-filters">
+                        <button class="view-btn active" data-view="all">
+                            <i class="fas fa-globe"></i> All Events
+                        </button>
+                        <button class="view-btn" data-view="registered">
+                            <i class="fas fa-check-circle"></i> My Registered Events
+                        </button>
+                    </div>
+                </div>
+                <div class="user-menu">
+                    <div class="notifications">
+                        <i class="fas fa-bell"></i>
+                        <span class="notification-badge">3</span>
+                    </div>
+                    <div class="user-profile">
+                        <div class="user-info">
+                            <span class="username">Loading...</span>
+                            <span class="user-role">User</span>
+                        </div>
+                    </div>
+                </div>
+            </header>
+
+            <div class="dashboard-content">
+                <div class="calendar-container">
+                    <div class="calendar-sidebar">
+                        <div class="category-filters">
+                            <h3>Event Categories</h3>
+                            <div class="category-list">
+                                <label class="category-item">
+                                    <input type="checkbox" value="1" checked>
+                                    <span class="category-color" style="background: #4CAF50;"></span>
+                                    Workshop
+                                </label>
+                                <label class="category-item">
+                                    <input type="checkbox" value="2" checked>
+                                    <span class="category-color" style="background: #2196F3;"></span>
+                                    Seminar
+                                </label>
+                                <label class="category-item">
+                                    <input type="checkbox" value="3" checked>
+                                    <span class="category-color" style="background: #FF9800;"></span>
+                                    Club Activity
+                                </label>
+                                <label class="category-item">
+                                    <input type="checkbox" value="4" checked>
+                                    <span class="category-color" style="background: #E91E63;"></span>
+                                    Sports
+                                </label>
+                                <label class="category-item">
+                                    <input type="checkbox" value="5" checked>
+                                    <span class="category-color" style="background: #9C27B0;"></span>
+                                    Academic
+                                </label>
+                            </div>
+                        </div>
+                        <div class="upcoming-events">
+                            <h3>Upcoming Events</h3>
+                            <div id="upcomingEventsList">
+                                <!-- Upcoming events will be loaded here -->
+                            </div>
+                        </div>
+                    </div>
+                    <div class="calendar-main">
+                        <div id="calendar"></div>
+                    </div>
+                </div>
+            </div>
+        </main>
+    </div>
+
+    <!-- Event Details Modal -->
+    <div id="eventModal" class="modal">
+        <div class="modal-content">
+            <span class="close-modal">&times;</span>
+            <div id="eventDetails">
+                <!-- Event details will be loaded here -->
+            </div>
+        </div>
+    </div>
+
+    <script src='https://cdn.jsdelivr.net/npm/@fullcalendar/core@6.1.8/main.min.js'></script>
+    <script src='https://cdn.jsdelivr.net/npm/@fullcalendar/daygrid@6.1.8/main.min.js'></script>
+    <script src='https://cdn.jsdelivr.net/npm/@fullcalendar/timegrid@6.1.8/main.min.js'></script>
+    <script>
+    document.addEventListener('DOMContentLoaded', function() {
+        var calendarEl = document.getElementById('calendar');
+        var calendar = new FullCalendar.Calendar(calendarEl, {
+            plugins: [ 'dayGrid', 'timeGrid' ],
+            header: {
+                left: 'prev,next today',
+                center: 'title',
+                right: 'dayGridMonth,timeGridWeek,timeGridDay'
+            },
+            events: async function(fetchInfo, successCallback, failureCallback) {
+                try {
+                    const response = await fetch('/api/events');
+                    const events = await response.json();
+                    successCallback(events.map(event => ({
+                        title: event.title,
+                        start: event.date + 'T' + event.time,
+                        extendedProps: {
+                            description: event.description,
+                            location: event.location,
+                            availableSeats: event.available_seats
+                        }
+                    })));
+                } catch (error) {
+                    failureCallback(error);
+                }
+            },
+            eventClick: function(info) {
+                var eventObj = info.event.extendedProps;
+                var modal = document.getElementById('eventModal');
+                modal.querySelector('.modal-content').innerHTML = `
+                    <h3>${info.event.title}</h3>
+                    <p><strong>Date:</strong> ${info.event.start.toLocaleDateString()}</p>
+                    <p><strong>Time:</strong> ${info.event.start.toLocaleTimeString()}</p>
+                    <p><strong>Location:</strong> ${eventObj.location}</p>
+                    <p><strong>Available Seats:</strong> ${eventObj.availableSeats}</p>
+                    <p>${eventObj.description}</p>
+                    <button onclick="closeModal()">Close</button>
+                `;
+                modal.style.display = 'block';
+            }
+        });
+        calendar.render();
+    });
+
+    function closeModal() {
+        document.getElementById('eventModal').style.display = 'none';
+    }
+    </script>
+
+</body>
+</html>

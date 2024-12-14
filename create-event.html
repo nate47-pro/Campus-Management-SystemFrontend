@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Create Event</title>
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/user_dashboard.css">
+    <link rel="stylesheet" href="css/create-event.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+</head>
+<body>
+    <div class="dashboard-container">
+        <!-- Sidebar -->
+        <aside class="sidebar">
+            <div class="sidebar-header">
+                <img src="images/logo.png" alt="Academic City Logo" class="logo">
+                <h2>Viva-Vents</h2>
+            </div>
+            
+            <nav class="sidebar-nav">
+                <a href="dashboard.html" class="nav-item">
+                    <i class="fas fa-home"></i>
+                    <span>Dashboard</span>
+                </a>
+                <a href="admin.html" class="nav-item">
+                    <i class="fas fa-cog"></i>
+                    <span>Admin Panel</span>
+                </a>
+                <a href="create-event.html" class="nav-item active">
+                    <i class="fas fa-plus-circle"></i>
+                    <span>Create Event</span>
+                </a>
+            </nav>
+
+            <div class="sidebar-footer">
+                <a href="#" id="logoutBtn" class="nav-item">
+                    <i class="fas fa-sign-out-alt"></i>
+                    <span>Logout</span>
+                </a>
+            </div>
+        </aside>
+
+        <!-- Main Content -->
+        <main class="main-content">
+            <header class="top-bar">
+                <h1><i class="fas fa-plus-circle"></i> Create New Event</h1>
+                <div class="user-menu">
+                    <div class="user-profile">
+                        <div class="user-info">
+                            <span class="username">Loading...</span>
+                            <span class="user-role">Administrator</span>
+                        </div>
+                    </div>
+                </div>
+            </header>
+
+            <div class="dashboard-content">
+                <div class="create-event-container">
+                    <form id="create-event-form">
+                        <div class="form-group">
+                            <label for="title">Event Title:</label>
+                            <input type="text" id="title" name="title" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="description">Description:</label>
+                            <textarea id="description" name="description" required></textarea>
+                        </div>
+                        <div class="form-group">
+                            <label for="date">Date:</label>
+                            <input type="date" id="date" name="date" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="time">Time:</label>
+                            <input type="time" id="time" name="time" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="location">Location:</label>
+                            <input type="text" id="location" name="location" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="capacity">Capacity:</label>
+                            <input type="number" id="capacity" name="capacity" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="category">Category:</label>
+                            <select id="category" name="category" required>
+                                <option value="1">Workshop</option>
+                                <option value="2">Seminar</option>
+                                <option value="3">Club Activity</option>
+                                <option value="4">Sports</option>
+                                <option value="5">Academic</option>
+                            </select>
+                        </div>
+                        <button type="submit">Create Event</button>
+                    </form>
+
+                    <script>
+                    document.getElementById('create-event-form').addEventListener('submit', async function(event) {
+                        event.preventDefault();
+                        const formData = new FormData(this);
+
+                        const data = {
+                            title: formData.get('title'),
+                            description: formData.get('description'),
+                            date: formData.get('date'),
+                            time: formData.get('time'),
+                            location: formData.get('location'),
+                            capacity: parseInt(formData.get('capacity')),
+                            category_id: parseInt(formData.get('category'))
+                        };
+
+                        try {
+                            const response = await fetch('/api/events', {
+                                method: 'POST',
+                                headers: {
+                                    'Content-Type': 'application/json',
+                                    'Authorization': `Bearer ${localStorage.getItem('token')}`
+                                },
+                                body: JSON.stringify(data)
+                            });
+
+                            if (response.ok) {
+                                alert('Event created successfully!');
+                                window.location.href = '/admin.html';
+                            } else {
+                                const error = await response.json();
+                                alert('Error: ' + error.message);
+                            }
+                        } catch (error) {
+                            alert('Error: ' + error.message);
+                        }
+                    });
+                    </script>
+                </div>
+            </div>
+        </main>
+    </div>
+
+    <script src="js/auth.js"></script>
+    <script src="js/create-event.js"></script>
+</body>
+</html>

@@ -1,0 +1,132 @@
+.my-events-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 30px;
+    flex-wrap: wrap;
+    gap: 20px;
+}
+
+.my-events-header h1 {
+    font-size: 24px;
+    color: #333;
+}
+
+.event-filters {
+    display: flex;
+    gap: 10px;
+}
+
+.filter-btn {
+    padding: 8px 16px;
+    border: 1px solid var(--primary-color);
+    background: white;
+    color: var(--primary-color);
+    border-radius: 20px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.filter-btn.active {
+    background: var(--primary-color);
+    color: white;
+}
+
+.filter-btn:hover {
+    background: var(--primary-color);
+    color: white;
+}
+
+.event-card {
+    position: relative;
+}
+
+.event-status {
+    position: absolute;
+    top: 15px;
+    right: 15px;
+    padding: 5px 10px;
+    border-radius: 15px;
+    font-size: 12px;
+    font-weight: 500;
+}
+
+.status-upcoming {
+    background: #e3f2fd;
+    color: #1976d2;
+}
+
+.status-ongoing {
+    background: #e8f5e9;
+    color: #388e3c;
+}
+
+.status-past {
+    background: #fafafa;
+    color: #616161;
+}
+
+.event-actions {
+    display: flex;
+    gap: 10px;
+    margin-top: 15px;
+}
+
+.action-btn {
+    padding: 8px 15px;
+    border-radius: 5px;
+    border: none;
+    cursor: pointer;
+    font-size: 14px;
+    transition: all 0.3s ease;
+    display: flex;
+    align-items: center;
+    gap: 5px;
+}
+
+.cancel-btn {
+    background: #ffebee;
+    color: #c62828;
+}
+
+.cancel-btn:hover {
+    background: #ffcdd2;
+}
+
+.details-btn {
+    background: #f5f6fa;
+    color: #666;
+}
+
+.details-btn:hover {
+    background: #e8eaf6;
+}
+
+.qr-code {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background: white;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 3px 10px rgba(0, 0, 0, 0.2);
+    display: none;
+}
+
+.qr-code.show {
+    display: block;
+}
+
+@media screen and (max-width: 768px) {
+    .my-events-header {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+
+    .event-filters {
+        width: 100%;
+        overflow-x: auto;
+        padding-bottom: 10px;
+    }
+} 
