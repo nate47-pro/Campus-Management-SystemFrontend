@@ -60,3 +60,4 @@ The application is fully responsive and optimized for:
 ## Color Scheme
 
 
+
