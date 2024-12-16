@@ -60,4 +60,15 @@ The application is fully responsive and optimized for:
 ## Color Scheme
 
 
+## User Login Details
+
+- Email: nate@gmail.com
+- Password: hiworld
+
+## Admin Login Details
+
+- Email: Max@example.com
+- Password: test 
+
+
 

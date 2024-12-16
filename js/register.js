@@ -1,8 +1,7 @@
 const registerForm = document.getElementById('registerForm');
-const registerBtn = document.getElementById('registerBtn');
 
-registerBtn.addEventListener('submit', () => {
-    
+registerForm.addEventListener('submit', (e) => {
+    e.preventDefault();
     let username = document.getElementById('username').value;
     let email = document.getElementById('email').value;
     let password = document.getElementById('password').value;
@@ -15,7 +14,7 @@ registerBtn.addEventListener('submit', () => {
         alert('Passwords do not match');
         return;
     }
-    fetch('https://campus-management-systembackend.onrender.com/api/v2/auth/register', {
+    fetch('http://localhost:5000/api/v2/auth/register', {
         method: 'POST',
         headers: {
             'Content-Type': 'application/json'
@@ -24,9 +23,10 @@ registerBtn.addEventListener('submit', () => {
     })
     .then(response => response.json())
     .then(data => {
-        console.log(data);
         if(data.message === "User registered successfully"){
-            window.location.href = 'login.html';
+            alert(data.message);
+            localStorage.setItem('user', JSON.stringify(data.user));
+            window.location.href = 'user_dashboard.html';
         }
     })
     .catch(error => {

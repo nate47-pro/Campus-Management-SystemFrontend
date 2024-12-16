@@ -11,7 +11,7 @@
 </head>
 <body>
     <div class="dashboard-container">
-        <!-- Sidebar -->
+        <!-- Modernized Sidebar -->
         <aside class="sidebar">
             <div class="sidebar-header">
                 <img src="images/logo.png" alt="Logo" class="logo">
@@ -19,18 +19,29 @@
             </div>
             
             <nav class="sidebar-nav">
-                <a href="dashboard.html" class="nav-item">
-                    <i class="fas fa-home"></i>
-                    <span>Dashboard</span>
-                </a>
-                <a href="my-events.html" class="nav-item">
-                    <i class="fas fa-ticket-alt"></i>
-                    <span>My Events</span>
-                </a>
-                <a href="create-event.html" class="nav-item">
-                    <i class="fas fa-plus-circle"></i>
-                    <span>Create Event</span>
-                </a>
+                <div class="nav-section">
+                    <h3>Main</h3>
+                    <a href="user_dashboard.html" class="nav-item">
+                        <i class="fas fa-home"></i>
+                        <span>Dashboard</span>
+                    </a>
+                    <a href="my-events.html" class="nav-item">
+                        <i class="fas fa-calendar"></i>
+                        <span>Events</span>
+                    </a>
+                </div>
+                
+                <div class="nav-section">
+                    <h3>Management</h3>
+                    <a href="users.html" class="nav-item">
+                        <i class="fas fa-users"></i>
+                        <span>Users</span>
+                    </a>
+                    <a href="create-event.html" class="nav-item">
+                        <i class="fas fa-plus-circle"></i>
+                        <span>Create Event</span>
+                    </a>
+                </div>
             </nav>
 
             <div class="sidebar-footer">
@@ -41,21 +52,30 @@
             </div>
         </aside>
 
-        <!-- Main Content -->
+        <!-- Enhanced Main Content -->
         <main class="main-content">
             <header class="top-bar">
-                <div class="search-bar">
-                    <i class="fas fa-search"></i>
-                    <input type="text" placeholder="Search users...">
+                <div class="header-left">
+                    <button class="menu-toggle">
+                        <i class="fas fa-bars"></i>
+                    </button>
+                    <div class="search-bar">
+                        <i class="fas fa-search"></i>
+                        <input type="text" placeholder="Search...">
+                    </div>
                 </div>
-                <div class="user-menu">
+                
+                <div class="header-right">
                     <div class="notifications">
                         <i class="fas fa-bell"></i>
                         <span class="notification-badge">0</span>
                     </div>
                     <div class="user-profile">
-                        <img src="images/avatar.png" alt="User Avatar">
-                        <span class="username">Admin</span>
+                        <img src="images/avatar.png" alt="User Avatar" class="avatar">
+                        <div class="user-info">
+                            <span class="username">Admin</span>
+                            <span class="role">Administrator</span>
+                        </div>
                     </div>
                 </div>
             </header>

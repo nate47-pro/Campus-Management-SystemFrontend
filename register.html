@@ -43,26 +43,14 @@
                     <div class="form-group">
                         <label>Event Preferences</label>
                         <div class="preferences-grid">
-                            <label class="preference-item">
-                                <input type="checkbox" name="preferences" value="1">
-                                Workshop
-                            </label>
-                            <label class="preference-item">
-                                <input type="checkbox" name="preferences" value="2">
-                                Seminar
-                            </label>
-                            <label class="preference-item">
-                                <input type="checkbox" name="preferences" value="3">
-                                Club Activity
-                            </label>
-                            <label class="preference-item">
-                                <input type="checkbox" name="preferences" value="4">
-                                Sports
-                            </label>
-                            <label class="preference-item">
-                                <input type="checkbox" name="preferences" value="5">
-                                Academic
-                            </label>
+                            <select id="preferences" name="preferences" required>
+                                <option value="">Select a preference</option>
+                                <option value="1">Workshop</option>
+                                <option value="2">Seminar</option>
+                                <option value="3">Club Activity</option>
+                                <option value="4">Sports</option>
+                                <option value="5">Academic</option>
+                            </select>
                         </div>
                     </div>
                     <button type="submit" class="login-btn">Sign Up</button>
