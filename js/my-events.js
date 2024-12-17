@@ -1,12 +1,16 @@
 // Function to fetch user's events from RSVP table
 async function fetchUserEvents() {
     try {
-        const response = await fetch('/api/my-events', {
+        const user = JSON.parse(localStorage.getItem("user"));
+        if (!user?.id) {
+            throw new Error('User not authenticated');
+        }
+
+        const response = await fetch(`http://localhost:5000/api/v2/events/getAUserRsvp/${user.id}`, {
             method: 'GET',
             headers: {
                 'Content-Type': 'application/json',
             },
-            credentials: 'include' // to include session cookies
         });
 
         if (!response.ok) {
@@ -14,10 +18,26 @@ async function fetchUserEvents() {
         }
 
         const events = await response.json();
-        displayEvents(events);
+        // Transform the event data to match the expected format
+        const transformedEvents = events.map(event => ({
+            event_id: event.event_id,
+            event_name: event.name,
+            event_date: event.event_date,
+            event_time: event.event_time,
+            venue: event.location,
+            status: event.status,
+            rsvp_id: event.rsvp_id
+        }));
+
+        displayEvents(transformedEvents);
     } catch (error) {
         console.error('Error fetching events:', error);
-        // Handle error state - maybe show an error message to user
+        const eventsContainer = document.getElementById('myEventsList');
+        eventsContainer.innerHTML = `
+            <div class="error-message">
+                <p>${error.message || 'Failed to load your events. Please try again later.'}</p>
+            </div>
+        `;
     }
 }
 
