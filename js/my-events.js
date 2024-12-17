@@ -6,7 +6,7 @@ async function fetchUserEvents() {
             throw new Error('User not authenticated');
         }
 
-        const response = await fetch(`http://localhost:5000/api/v2/events/getAUserRsvp/${user.id}`, {
+        const response = await fetch(`https://campus-management-systembackend.onrender.com/api/v2/events/getAUserRsvp/${user.id}`, {
             method: 'GET',
             headers: {
                 'Content-Type': 'application/json',

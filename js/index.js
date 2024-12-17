@@ -6,7 +6,7 @@ form.addEventListener('submit', (e) => {
     let password = document.getElementById('password').value;
     
     // console.log(`email: ${email}, password: ${password}`);
-    fetch('http://localhost:5000/api/v2/auth/login', {
+    fetch('https://campus-management-systembackend.onrender.com/api/v2/auth/login', {
         method: 'POST',
         headers: {
             'Content-Type': 'application/json'

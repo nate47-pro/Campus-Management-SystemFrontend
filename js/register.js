@@ -14,7 +14,7 @@ registerForm.addEventListener('submit', (e) => {
         alert('Passwords do not match');
         return;
     }
-    fetch('http://localhost:5000/api/v2/auth/register', {
+    fetch('https://campus-management-systembackend.onrender.com/api/v2/auth/register', {
         method: 'POST',
         headers: {
             'Content-Type': 'application/json'

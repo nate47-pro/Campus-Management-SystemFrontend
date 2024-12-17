@@ -35,7 +35,7 @@ const loadEvents = async () => {
         // Show loading state
         eventsList.innerHTML = '<div class="loading">Loading events...</div>';
 
-        const response = await fetch('http://localhost:5000/api/v2/events/getEvents');
+        const response = await fetch('https://campus-management-systembackend.onrender.com/api/v2/events/getEvents');
         
         if (!response.ok) {
             throw new Error('Failed to fetch events');
@@ -71,7 +71,7 @@ const registerForEvent = async (eventId) => {
             return;
         }
 
-        const response = await fetch(`http://localhost:5000/api/v2/events/register/${eventId}`, {
+        const response = await fetch(`https://campus-management-systembackend.onrender.com/api/v2/events/register/${eventId}`, {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',
