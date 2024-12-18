@@ -85,17 +85,15 @@
                         <div class="form-group">
                             <label for="category">Category:</label>
                             <select id="category" name="category" required>
-                                <option value="1">Workshop</option>
-                                <option value="2">Seminar</option>
-                                <option value="3">Club Activity</option>
-                                <option value="4">Sports</option>
-                                <option value="5">Academic</option>
+                                <option value="Workshop">Workshop</option>
+                                <option value="Seminar">Seminar</option>
+                                <option value="Club Activities">Club Activities</option>
                             </select>
                         </div>
                         <button type="submit">Create Event</button>
                     </form>
 
-                    <script>
+                    <!-- <script>
                     document.getElementById('create-event-form').addEventListener('submit', async function(event) {
                         event.preventDefault();
                         const formData = new FormData(this);
@@ -131,7 +129,7 @@
                             alert('Error: ' + error.message);
                         }
                     });
-                    </script>
+                    </script> -->
                 </div>
             </div>
         </main>
