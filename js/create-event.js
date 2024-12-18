@@ -24,7 +24,7 @@ createEventForm.addEventListener('submit', async function(event) {
         event_time: formData.get('time'),
         location: formData.get('location'),
         capacity: parseInt(formData.get('capacity')),
-        available_seats: parseInt(formData.get('capacity')), // Initially, available seats equals capacity
+        // available_seats: parseInt(formData.get('capacity')), // Initially, available seats equals capacity
         type: formData.get('category'),
         created_by: user.id
     };
