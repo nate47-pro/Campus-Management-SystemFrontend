@@ -17,7 +17,10 @@ form.addEventListener('submit', (e) => {
     .then(data => {
         if (data.error) {
             alert(data.error);
-        } else {
+        } else if(data.user.role === "admin") {
+            localStorage.setItem('user', JSON.stringify(data.user));
+            window.location.href = 'admin.html';
+        }else{
             localStorage.setItem('user', JSON.stringify(data.user));
             window.location.href = 'user_dashboard.html';
         }
