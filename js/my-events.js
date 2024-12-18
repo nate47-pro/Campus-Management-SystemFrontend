@@ -112,7 +112,7 @@ async function cancelRegistration(eventId) {
     }
 
     try {
-        const response = await fetch(`/api/rsvp/${eventId}`, {
+        const response = await fetch(`https://campus-management-systembackend.onrender.com/api/rsvp/${eventId}`, {
             method: 'DELETE',
             headers: {
                 'Content-Type': 'application/json'
@@ -134,7 +134,7 @@ async function cancelRegistration(eventId) {
 
 // Function to view event details
 function viewEventDetails(eventId) {
-    window.location.href = `/event-details.html?id=${eventId}`;
+    window.location.href = `https://campus-management-systembackend.onrender.com/event-details.html?id=${eventId}`;
 }
 
 // Filter events based on type (upcoming, past, all)
